@@ -1,0 +1,52 @@
+
+<nav class="navbar navbar-light bg-primary justify-content-between">
+  <span class="navbar-brand ">CRUD OPERATIONS</span>
+  <form class="form-inline">
+    <button class="btn btn-danger  my-2 my-sm-0" type="submit" routerLink="/login">Logout</button>
+  </form>
+</nav>
+<br>
+
+
+<button type="button" class="btn btn-success" style="float:right;" [disabled]="moviename===''" (click)="save()">save</button>
+<button type="button" class="btn btn-success" style="float:right;"  (click)="hello(moviedata)">update</button>
+
+<button type="button" class="btn btn-success"  (click)="add()">Add Movie</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+<table class="table table-dark text-center">
+    <thead>
+      <tr>
+        <th scope="col">MovieName</th>
+        <th scope="col">Genre</th>
+        <th scope="col">Delete</th>
+        <th scope="col">edit</th>
+        <th scope="col">add</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="text-center" [class.selected]="moviedetails === selectedmovie" *ngFor="let moviedetails of moviedata.movie; let i=index" >
+
+        <td >{{moviedetails.moviename}}</td>
+        <td>{{moviedetails.genre}}</td>
+        <td><mat-icon (click)="delete(moviedetails,i)">delete</mat-icon></td>
+        <td><mat-icon (click)="edit(moviedetails)">edit</mat-icon></td>
+        <td><mat-icon (click)="add()">add</mat-icon></td>
+        
+      </tr>
+      <tr *ngIf="selectedmovie">
+        <td><input type="text"  [(ngModel)]="selectedmovie.moviename"></td>
+        <td><input type="text"  [(ngModel)]="selectedmovie.genre"></td>
+
+      </tr>
+      <tr *ngFor="let value of movies().controls; let i=index ">
+        <td><input type="text"  [(ngModel)]="moviename"></td>
+        <td><input type="text"  [(ngModel)]="genre"></td>
+        <td><mat-icon >delete</mat-icon></td>
+        <td><mat-icon >edit</mat-icon></td>
+        <td><mat-icon (click)="add()">add</mat-icon></td>
+      </tr>
+    </tbody>
+  </table>
+
